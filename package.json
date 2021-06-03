@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "\"# server\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sameerskamdar/server.git"
+  },
+  "author": "sameer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sameerskamdar/server/issues"
+  },
+  "homepage": "https://github.com/sameerskamdar/server#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
