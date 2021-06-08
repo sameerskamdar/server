@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
   },
   passwordConfirm: {
     type: String,
-    required: [true, 'cpnfirm your password is required'],
+    required: [true, 'confirm your password is required'],
     validate: {
       validator: function(el) {
         return this.password === el;
@@ -41,7 +41,12 @@ const userSchema = new mongoose.Schema({
   },
   passwordChagedAt: Date,
   passwordResetToken: String,
-  passwordResetExpires: Date
+  passwordResetExpires: Date,
+  active: {
+    type: Boolean,
+    default: true,
+    select: false
+  }
 });
 
 userSchema.pre('save', async function(next) {
@@ -55,6 +60,11 @@ userSchema.pre('save', async function(next) {
 userSchema.pre('save', async function(next) {
   if (!this.isModified('password') || this.isNew) return next();
   this.passwordChagedAt = Date.now() - 1000;
+});
+
+userSchema.pre(/^find/, async function(next) {
+  this.find({ active: { $ne: false } });
+  next();
 });
 
 userSchema.methods.correctPassword = async function(
